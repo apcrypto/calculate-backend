@@ -31,5 +31,4 @@ class Api::V1::UsersController < ApplicationController
       render json: {error: "Not a valid user."}, status: 401
     end
   end
-
 end
