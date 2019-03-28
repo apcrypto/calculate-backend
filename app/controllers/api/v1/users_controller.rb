@@ -5,6 +5,16 @@ class Api::V1::UsersController < ApplicationController
     render json: @users
   end
 
+  def create
+    @user = User.create(email: params[:email], password: params[:password])
+    # byebug
+    if @user.save
+      render json: @user
+    else
+      render json: {error: "could not create user"}, status: 401
+    end
+  end
+
   def signin
     @user = User.find_by(email: params[:email])
     if @user && @user.authenticate(params[:password])
@@ -31,4 +41,5 @@ class Api::V1::UsersController < ApplicationController
       render json: {error: "Not a valid user."}, status: 401
     end
   end
+
 end

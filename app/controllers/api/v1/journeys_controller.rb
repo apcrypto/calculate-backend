@@ -6,9 +6,12 @@ class Api::V1::JourneysController < ApplicationController
   end
 
   def create
-    @journey = Journey.new(journey_params, user_id: 1)
-    @journey.save
-    render json: @journey
+    if get_current_user
+      @journey = Journey.new(arrival_loc: params[:arrival_loc], date_of_service: params[:date_of_service], price: params[:price], refund: params[:refund], delay: params[:delay], user_id: params[:user_id], user: get_current_user)
+      @journey.save
+      byebug
+      render json: @journey
+    end
   end
 
   def update

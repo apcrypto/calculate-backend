@@ -16,14 +16,10 @@ ActiveRecord::Schema.define(version: 2019_03_13_175851) do
   enable_extension "plpgsql"
 
   create_table "journeys", force: :cascade do |t|
-    t.string "from_loc"
-    t.string "to_loc"
-    t.integer "from_time"
-    t.integer "to_time"
-    t.string "from_date"
-    t.string "to_date"
+    t.string "arrival_loc"
+    t.string "date_of_service"
     t.float "price"
-    t.string "days"
+    t.float "refund"
     t.integer "delay"
     t.integer "user_id"
     t.datetime "created_at", null: false
@@ -31,8 +27,6 @@ ActiveRecord::Schema.define(version: 2019_03_13_175851) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
     t.string "email"
     t.string "password_digest"
     t.datetime "created_at", null: false
