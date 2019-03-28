@@ -1,15 +1,19 @@
 class Api::V1::JourneysController < ApplicationController
 
   def index
-    @journeys = Journey.all
-    render json: @journeys
+    # byebug 
+    if get_current_user
+      render json: get_current_user.journeys
+    else
+      render json: []
+    end
   end
 
   def create
     if get_current_user
       @journey = Journey.new(arrival_loc: params[:arrival_loc], date_of_service: params[:date_of_service], price: params[:price], refund: params[:refund], delay: params[:delay], user_id: params[:user_id], user: get_current_user)
       @journey.save
-      byebug
+      # byebug
       render json: @journey
     end
   end
